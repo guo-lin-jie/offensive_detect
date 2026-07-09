@@ -1,13 +1,13 @@
 # 中文违规语言检测
 
-基于 **COLDataset**(COLD: A Benchmark for Chinese Offensive Language Detection, EMNLP 2022)
+基于 **COLDataset**
 训练的二分类模型,判定中文文本是否为违规/冒犯性语言。
 
 ## 方案:feature-based BERT + MLP
 
-1. 用预训练中文 BERT(`bert-base-chinese`)对每条文本做一次前向,提取 `[CLS]` 句向量(768 维),
+1. 用预训练中文 BERT对每条文本做一次前向,提取 `[CLS]` 句向量(768 维),
    缓存为 `.npy`(`artifacts/features/`)——一次性成本(全量约 20–40 分钟,之后全部复用)。
-2. 在缓存特征上训练轻量 **MLP 二分类头**(秒级~分钟级,可反复调参)。
+2. 在缓存特征上训练轻量 **MLP 二分类头**。
 3. 推理时复用同一 BERT + 已训练 MLP。
 4. 使用数据集为中文冒犯语言检测数据集(https://huggingface.co/thu-coai/roberta-base-cold?text=%E4%BD%A0%E6%98%AF%E4%B8%8D%E6%98%AF%E5%82%BB)
 
@@ -45,8 +45,7 @@ pip install -r requirements.txt
 改用镜像手动下载到 `E:/3/models/bert-base-chinese/`(config.py 会自动用本地路径):
 
 ```bash
-# 用镜像下载 config.json / vocab.txt / tokenizer_config.json / pytorch_model.bin(~411MB)
-# 例:
+# 用镜像下载 config.json
 mkdir -p E:/3/models/bert-base-chinese
 cd E:/3/models/bert-base-chinese
 for f in config.json vocab.txt tokenizer_config.json pytorch_model.bin; do
