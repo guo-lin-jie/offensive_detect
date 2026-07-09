@@ -1,4 +1,4 @@
-# 中文违规语言检测 (offensive_detect)
+# 中文违规语言检测
 
 基于 **COLDataset**(COLD: A Benchmark for Chinese Offensive Language Detection, EMNLP 2022)
 训练的二分类模型,判定中文文本是否为违规/冒犯性语言。
@@ -9,9 +9,7 @@
    缓存为 `.npy`(`artifacts/features/`)——一次性成本(全量约 20–40 分钟,之后全部复用)。
 2. 在缓存特征上训练轻量 **MLP 二分类头**(秒级~分钟级,可反复调参)。
 3. 推理时复用同一 BERT + 已训练 MLP。
-4. 使用数据集为中文冒犯语言检测数据集
-Paper link: https://arxiv.org/abs/2201.06025
-Detector: We release the version of [roberta-base-cold](https://huggingface.co/thu-coai/roberta-base-cold?text=%E4%BD%A0%E6%98%AF%E4%B8%8D%E6%98%AF%E5%82%BB) in Huggingface.
+4. 使用数据集为中文冒犯语言检测数据集(https://huggingface.co/thu-coai/roberta-base-cold?text=%E4%BD%A0%E6%98%AF%E4%B8%8D%E6%98%AF%E5%82%BB)
 
 
 ## 代码结构(三个 .py)
